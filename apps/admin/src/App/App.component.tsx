@@ -2,10 +2,12 @@ import { styles } from '@jc-survey/ui'
 
 import Section from '@/components/Section/Section.component'
 import SectionTitle from '@/components/SectionTitle/SectionTitle.component'
-import { useSurveyModel } from '@/hooks'
+import { useFocusCard, useSurveyModel } from '@/hooks'
+import SectionItemList from '@/components/SectionItemList/SectionItemList.component'
 
 function App() {
-  const { handleSectionAdd, sections, totalIndex } = useSurveyModel()
+  const { sections, totalIndex, handleAddSection, handleAddItem } =
+    useSurveyModel()
 
   return (
     <main className={styles.container}>
@@ -16,10 +18,14 @@ function App() {
           totalIndex={totalIndex}
         >
           <SectionTitle idx={index} />
+          <SectionItemList sectionIndex={index} />
         </Section>
       ))}
-      <button onClick={handleSectionAdd} type="button">
+      <button onClick={handleAddSection} type="button">
         섹션 추가
+      </button>
+      <button onClick={handleAddItem} type="button">
+        질문 추가
       </button>
     </main>
   )

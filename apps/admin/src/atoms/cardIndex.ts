@@ -1,3 +1,13 @@
 import { atom } from 'jotai'
 
-export const cardIndex = atom<number | null>(null)
+export type TOpenedCardInfo = {
+  sectionIndex: number
+  itemIndex: number | null
+  isOpened: boolean
+}
+
+export const cardInfoAtom = atom<TOpenedCardInfo>({
+  sectionIndex: 0,
+  itemIndex: null,
+  isOpened: true,
+})

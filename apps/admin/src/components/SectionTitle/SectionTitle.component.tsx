@@ -11,10 +11,10 @@ type Props = {
 }
 
 function SectionTitle({ idx }: Props) {
-  const { cardRef, handleCardBlur, changeFocusCard, openedCardIndex } =
+  const { cardRef, handleCardBlur, changeCardFocus, openedCardInfo } =
     useFocusCard()
 
-  const { sections, handleSectionInput, handleSectionDelete } = useSurveyModel()
+  const { sections, handleInputSection, handleDeleteSection } = useSurveyModel()
 
   const isFirst = idx === 0
   const canDelete = sections.length > 1
@@ -25,8 +25,8 @@ function SectionTitle({ idx }: Props) {
       return
     }
 
-    changeFocusCard(idx)
-  }, [changeFocusCard, idx, section])
+    changeCardFocus({ sectionIndex: idx, itemIndex: null })
+  }, [changeCardFocus, idx, section])
 
   if (!section) {
     return null
@@ -39,24 +39,27 @@ function SectionTitle({ idx }: Props) {
       <div className={isFirst ? $.firstCardHighlighter : undefined}>
         <Card
           isFirst
-          isFocused={openedCardIndex === idx}
+          isFocused={
+            openedCardInfo.itemIndex == null &&
+            openedCardInfo.sectionIndex === idx
+          }
           onBlur={handleCardBlur}
-          onFocus={handleCardFocus}
+          onClick={handleCardFocus}
           ref={cardRef}
         >
           <div className={$.titleWrapper}>
             <Input
               fontSize={isFirst ? '24pt' : '12pt'}
               name="title"
-              onChange={handleSectionInput}
-              placeholder="섹션 제목(선택 사항)"
+              onChange={handleInputSection}
+              placeholder={isFirst ? '설문지 제목' : '섹션 제목(선택 사항)'}
               title="section_title"
               value={title}
             />
             {canDelete ? (
               <button
                 className={$.deleteButton}
-                onClick={() => handleSectionDelete(idx)}
+                onClick={() => handleDeleteSection(idx)}
                 type="button"
               >
                 섹션 삭제
@@ -66,8 +69,8 @@ function SectionTitle({ idx }: Props) {
           <Input
             fontSize="11pt"
             name="description"
-            onChange={handleSectionInput}
-            placeholder="섹션 설명(선택 사항)"
+            onChange={handleInputSection}
+            placeholder={isFirst ? '설문지 설명' : '설문 설명(선택 사항)'}
             title="section_description"
             value={description}
           />

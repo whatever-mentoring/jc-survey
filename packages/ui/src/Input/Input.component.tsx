@@ -1,4 +1,4 @@
-import { FormEvent, InputHTMLAttributes, forwardRef } from 'react'
+import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react'
 import { assignInlineVars } from '@vanilla-extract/dynamic'
 import classNames from 'classnames'
 import * as $ from './Input.css'
@@ -6,7 +6,7 @@ import * as $ from './Input.css'
 type Props = {
   placeholder: string
   value: string
-  onChange: (e: FormEvent<HTMLInputElement>) => void
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
   isTitle?: boolean
   fontSize?: string
 } & InputHTMLAttributes<HTMLInputElement>

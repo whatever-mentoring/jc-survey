@@ -1,35 +1,34 @@
 import { useAtom } from 'jotai'
 import { useCallback, useRef } from 'react'
-import { cardIndex } from '../atoms/cardIndex'
+import { TOpenedCardInfo, cardInfoAtom } from '../atoms/cardIndex'
 
 export function useFocusCard() {
-  const [openedCardIndex, setOpenedCardIndex] = useAtom(cardIndex)
-
+  const [openedCardInfo, setOpenedCardInfo] = useAtom(cardInfoAtom)
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const changeFocusCard = useCallback(
-    (idx: number) => {
+  const changeCardFocus = useCallback(
+    (
+      nextOpenedCardInfo: Pick<TOpenedCardInfo, 'sectionIndex' | 'itemIndex'>,
+    ) => {
       if (!cardRef.current) {
         return
       }
-
-      setOpenedCardIndex(idx)
+      setOpenedCardInfo({ ...nextOpenedCardInfo, isOpened: true })
     },
-    [setOpenedCardIndex],
+    [setOpenedCardInfo],
   )
 
   const handleCardBlur = useCallback(() => {
     if (!cardRef.current) {
       return
     }
-
-    setOpenedCardIndex(null)
-  }, [setOpenedCardIndex])
+    setOpenedCardInfo((prev) => ({ ...prev, isOpened: false }))
+  }, [setOpenedCardInfo])
 
   return {
-    openedCardIndex,
+    openedCardInfo,
     cardRef,
-    changeFocusCard,
+    changeCardFocus,
     handleCardBlur,
   }
 }

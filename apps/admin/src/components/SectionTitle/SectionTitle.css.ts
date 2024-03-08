@@ -23,7 +23,7 @@ export const firstCardHighlighter = style({
 export const titleWrapper = style({
   display: 'flex',
   justifyContent: 'space-between',
-  paddingRight: '24px',
+  gap: '2rem',
 })
 
 export const deleteButton = style({

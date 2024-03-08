@@ -5,9 +5,13 @@ export const card = style({
   backgroundColor: vars.color.grayScale00,
   border: `1px solid ${vars.color.grayScale100}`,
   borderRadius: '8px',
+  padding: '0 24px',
   paddingTop: '22px',
   paddingBottom: '24px',
   overflow: 'hidden',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
 })
 
 export const container = style({
