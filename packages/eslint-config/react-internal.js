@@ -18,6 +18,7 @@ module.exports = {
     'eslint:recommended',
     'eslint-config-turbo',
     'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   plugins: ['only-warn'],
   globals: {

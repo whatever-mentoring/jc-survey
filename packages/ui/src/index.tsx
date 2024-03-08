@@ -1,3 +1,5 @@
 export { Button } from './button'
-export { Card } from './card'
-export { Code } from './code'
+export { Card } from './Card/Card.component'
+export { Input } from './Input/Input.component'
+export { styles } from './styles.css'
+export { vars } from './global.css'
